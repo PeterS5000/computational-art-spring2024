@@ -32,7 +32,7 @@ class Dot {
 }
 
 function draw(){
-    background(0,0,100);
+    background(0,0,100); // creates background
     dots.update();
     for(let i = 0; i < dots.length; i++) {
         dots[i].update();
