@@ -72,3 +72,34 @@ function draw() {
   }
   updatePixels();
 }
+// function setup(){
+//   createCanvas(600,400);
+//   colorMode(HSB);
+
+// }
+// function draw(){
+//   background(0,0,100);
+
+//   push();
+//   translate(width/2, height/2);
+//   let xoff = 0;
+//   fill(0);
+//   beginShape();
+//   let baseRadius = 0;
+//   for(let theta = 0; theta < 2 * PI; theta+=0.01){
+//     let radius = 100 + random(-5,5);
+//     let x = radius * cos(theta);
+//     let y = radius * sin(theta);
+//     vertex(x,y);
+
+//     xoff += 0.2;
+//     baseRadius += 0.1;
+//   }
+
+//   pop();
+
+//   stroke(0);
+//   ellipse(0,0,200,200);
+
+//   noLoop();
+// }
