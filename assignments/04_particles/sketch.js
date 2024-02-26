@@ -2,9 +2,6 @@ let fireworks = [];
 
 function setup() {
   createCanvas(800, 600);
-  for (let i = 0; i < 100; i++) {
-    fireworks.push(new Firework());
-  }
 }
 
 function draw() {
@@ -16,6 +13,10 @@ function draw() {
       fireworks.splice(i, 1);
     }
   }
+}
+
+function mousePressed() {
+  fireworks.push(new Firework());
 }
 
 class Firework {
@@ -82,7 +83,7 @@ class Particle {
 
   show() {
     noStroke();
-    fill(random(0,255), random(0,255), random(0,255));
+    fill(random(0,255), random(0,255), random(0,255), this.alpha);
     ellipse(this.x, this.y, 20, 20);
   }
 
