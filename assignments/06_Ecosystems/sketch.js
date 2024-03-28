@@ -11,7 +11,7 @@ function setup() {
   colorMode(HSB);
   noStroke();
   
-  target = createVector(width/4, height/2);
+  target = createVector(mouseX, mouseY);
   for(let i = 0; i < numVehicles; i++) {
     vehicles.push(new Vehicle(random(width), random(height), target));
   }
@@ -20,46 +20,22 @@ function setup() {
 }
 
 function draw() {
-  background(217, 100, 100, 0.5);
+  background(0, 0, 0, 0.01);
 
   target.x = mouseX; 
   target.y = mouseY;
 
   ellipse(target.x, target.y, 10, 10);
+  ellipse(target.x+200, target.y+100, 10, 10);
 
   for (let vehicle of vehicles) {
     vehicle.update();
     vehicle.show();
+    vehicle.seek(target); 
+    vehicle.slowMode(); 
     vehicle.wrap();
   }
 
-//   fill(0, 0, 100);
-//   rect(0, 0, width, 20);
-  branch(400); 
-}
 
-function branch(l){
-    strokeWeight(1);
-    line(0,0,0,-l);
-  
-    translate(0, -l);
-  
-    l = l * 0.6;
-  
-    if (l > 4) {
-      push();
-      rotate(radians(-45 + map(noise(frameCount * 0.01), 0, 1, -2, 2)));
-      branch(l);
-      pop();
-  
-      push();
-      rotate(radians(45 + map(noise(frameCount + 100) * 0.01, 0, 1, -2, 2)));
-      branch(l);
-      pop();
-    } else {
-      // fill(random(360), 60, 100);
-      // noStroke();
-      ellipse(0, 0, 50);
-    }
-  }
+}
 

@@ -1,19 +1,17 @@
 class Vehicle {
     constructor(x, y, target) {
-        // For more detailed comments on how pos, vel, acc, and addForce work
-        // see the Dot example from 2-15-24.
 
         this.pos = createVector(x, y);
         this.vel = createVector(random(-1, 1), random(-1, 1));
-        this.acc = createVector(4, 0);
+        this.acc = createVector(10, 5);
 
         this.target = target;
-        this.maxSpeed = 10;
-        this.maxForce = 0.01;
+        this.maxSpeed = 20;
+        this.maxForce = 0.5;
 
         this.dim = 0 + random(5);
 
-        this.hue = 31;
+        this.hue = random(360);
         this.saturation = 100;
         this.brightness = 100; 
 
@@ -29,30 +27,23 @@ class Vehicle {
         this.acc.add(forceWithMass);
     }
 
-    seek(t, arrive) {
-        // 1. Compute the desired velocity and set it to be maxSpeed
-        let desired = p5.Vector.sub(t, this.pos);
+    seek(target, arrive) {
+       
+        let desired = p5.Vector.sub(target, this.pos);
 
-        // desired.mult(-1);
 
         let distance = desired.mag();
 
-        // If the caller passed in true, and we are close to the target, scale our
-        // speed based on the distance.
-        if (arrive && distance < 100) {
+        if (arrive && distance < 50) {
             let speed = map(distance, 0, 100, 0, this.maxSpeed);
             desired.setMag(speed);
         } else {
             desired.setMag(this.maxSpeed);
         }
 
-        // 2. Compute the force by seeing the the change is in velocities
-        // to move from the current velocity to the desired velocity and limit
-        // its magnitude.
         let steer = p5.Vector.sub(desired, this.vel);
         steer.limit(this.maxForce);
 
-        // 3. Apple this "steering" force. 
         this.addForce(steer);
     }
 
@@ -104,7 +95,7 @@ class Vehicle {
         sumOfAnglesToVehicles.setMag(this.maxSpeed);
         sumOfAnglesToVehicles.mult(-1);
         
-        // compute steering force
+        
         let steeringForce = p5.Vector.sub(sumOfAnglesToVehicles, this.vel);
         steeringForce.limit(this.maxForce);
 
@@ -121,7 +112,7 @@ class Vehicle {
         }
         sumOfVelocities.setMag(this.maxSpeed);
         
-        // compute steering force
+        
         let steeringForce = p5.Vector.sub(sumOfVelocities, this.vel);
         steeringForce.limit(this.maxForce);
 
@@ -136,7 +127,7 @@ class Vehicle {
             this.seek(mousePos);
         } else {
             let closeVehicles = this.getCloseVehicles();
-            // What actions is this agent pursuing?
+          
             let cohesionForce = this.cohesion(closeVehicles);
             cohesionForce.mult(1);
             this.addForce(cohesionForce);
@@ -155,12 +146,27 @@ class Vehicle {
         this.dim = map(this.pos.y, 0, height, 2, 20)
 
 
-        // MOVEMENT
-        this.vel.add(this.acc); // Apply acceleration (and thus the forces) to vel
+        
+        this.vel.add(this.acc); 
         this.vel.limit(this.maxSpeed);
-        this.pos.add(this.vel); // Apply velocity to position
+        this.pos.add(this.vel); 
 
         this.acc.set(0,0);
+    }
+
+    slowMode(){
+        if (this.pos.x > height/2){
+            this.maxForce=1;
+        
+        if(this.pos.y > width/2){
+            this.maxForce = 1; 
+
+        }
+
+        }
+
+
+
     }
 
     show() {
@@ -168,17 +174,13 @@ class Vehicle {
 
         translate(this.pos.x, this.pos.y);
 
-        // fill(0, 0, 10, 0.08);
-        // noStroke();
-        // ellipse(0, 0, this.range);
-
-        // Heading is the amount of rotation
+       
         let angle = this.vel.heading();
         rotate(angle);
 
         fill(this.hue, this.saturation, this.brightness);
 
-        // Draw a triangle
+        
         beginShape();
         vertex(this.dim, 0);
         vertex(-this.dim, this.dim/2);
