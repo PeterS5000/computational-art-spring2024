@@ -125,6 +125,7 @@ class Vehicle {
         if (mouseIsPressed) {
             let mousePos = createVector(mouseX, mouseY);
             this.seek(mousePos);
+            this.maxSpeed = 100; 
         } else {
             let closeVehicles = this.getCloseVehicles();
           
@@ -155,15 +156,15 @@ class Vehicle {
     }
 
     slowMode(){
-        if (this.pos.x > height/2){
-            this.maxForce=1;
+        if (this.pos.x > width/2){
+            this.maxSpeed=1;
+        }
+        if(this.pos.y > height/2){
+                this.maxSpeed = 1; 
+
+        }
+
         
-        if(this.pos.y > width/2){
-            this.maxForce = 1; 
-
-        }
-
-        }
 
 
 
