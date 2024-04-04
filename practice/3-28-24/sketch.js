@@ -18,8 +18,8 @@ function draw(){
    count = 0;
    push();
    translate(width/2, height/2);
-   scale(map(noise(frameCount*0.002), 0, 10, 1, 10)); 
-   rotate(frameCount * 0.01); 
+   scale(map(noise(frameCount*0.04), 0, 10, 1, 10)); 
+   rotate(frameCount * 0.02); 
    drawCircles(0 ,0 , 400);
    pop();
    
@@ -54,7 +54,7 @@ function drawCircles(x, y, diameter){
     else if(diameter > 10){
         drawCircles(x, y, diameter);
         drawCircles(x, y, diameter);
-        drawBranches(l);
+        
 
 
 
