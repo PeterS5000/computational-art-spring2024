@@ -1,8 +1,10 @@
 let sound;
 let synth; 
 let song;
+let delay;
 let LoopInterval = 1;
-let planets = []
+let snowflakes = []
+let numSnowflakes = 10; 
 let numPlanet 
 let numBranches = 20;
 let count; 
@@ -15,33 +17,32 @@ song = loadSound("482961__yellowtree__super-strange-synths.wav");
 
 function setup(){
     createCanvas(800,600);
+    synth = new p5.Oscillator();
+    synth.setType('sine'); 
+    synth.amp(2);
+    synth.freq(400);
     loop = new p5.SoundLoop(soundLoop, LoopInterval);
     colorMode(HSB);
-    for(let i = 0; i <planets; i++){
-        planets.push
-
-
+    for(let i = 0; i <numSnowflakes; i++){
+        snowflakes.push(new Snowflake(random(width), random(height)))
     }
 }
 
 
 
 function draw(){
-    background(0, 0, 0, 0.1); // creates background
+    background(0, 0, 0); // creates background
     count = 0;
     fill(0,0,100);
-    push();
-    translate(random(width),  random(height));
+    translate(width/2, height/2);
     rotate(frameCount * 0.02);
-    ellipse(random(800), random(600), 5, 5);
-    for(let i = 0; i < numBranches; i++){
-        push();
-        let angle = map(i, 0, numBranches, 0, (2*PI));
-        rotate(angle);
-        drawBranches(50);
-        pop();
-   }
-   pop();
+    ellipse(random(800), random(600), 10, 10);
+    
+    for (let snowflake of snowflakes){
+        snowflake.update();
+        snowflake.show();
+        snowflake.bounce();
+    }
     
 }
 
