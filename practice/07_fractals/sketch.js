@@ -21,6 +21,16 @@ function draw(){
    scale(map(noise(frameCount*0.04), 0, 10, 1, 10)); 
    rotate(frameCount * 0.02); 
    drawCircles(0 ,0 , 400);
+   let numBranches = 20; 
+   for(let i = 0; i < numBranches; i++){
+        push();
+        let angle = map(i, 0, numBranches, 0, (2*PI));
+        rotate(angle);
+        drawBranches(50);
+        pop();
+
+
+   }
    pop();
    
 }
@@ -72,7 +82,8 @@ function drawCircles(x, y, diameter){
 function drawBranches(l){
     count++;
 
-    strokeWeight(1 + count * 0.1);
+    strokeWeight(5);
+    stroke(0, 0, 100);
     line(0,0,0,-l);
   
     translate(0, -l);
@@ -90,7 +101,7 @@ function drawBranches(l){
       push();
       rotate(radians(50));
       drawBranches(l);
-      drawBranches(l);
+      
       pop();
       console.log(count);
     } 
