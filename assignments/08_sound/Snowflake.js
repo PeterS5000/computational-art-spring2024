@@ -3,7 +3,7 @@ class Snowflake{
             this.x = x;
             this.y = y;
             this.pos = createVector(x, y);
-            this.vel = createVector(10, 10); 
+            this.vel = createVector(random(-1,1), random(-1,1)); 
             this.size = 30;
             this.hue = random(0,359);
             this.saturation = 100;

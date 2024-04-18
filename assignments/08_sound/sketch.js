@@ -1,13 +1,13 @@
 let sound;
 let synth; 
 let song;
-let delay;
-let LoopInterval = 1;
+let notes = ['F2', 'E5', 'C5,', 'Bb4', 'D4', 'A1', 'F3'];
 let snowflakes = []
 let numSnowflakes = 10; 
-let numPlanet 
 let numBranches = 20;
 let count; 
+let randomNotes;
+let currentNote = 0; 
 
 
 function preload(){
@@ -17,11 +17,8 @@ song = loadSound("482961__yellowtree__super-strange-synths.wav");
 
 function setup(){
     createCanvas(800,600);
-    synth = new p5.Oscillator();
-    synth.setType('sine'); 
-    synth.amp(2);
-    synth.freq(400);
-    loop = new p5.SoundLoop(soundLoop, LoopInterval);
+    synth = new p5.PolySynth();
+    userStartAudio();
     colorMode(HSB);
     for(let i = 0; i <numSnowflakes; i++){
         snowflakes.push(new Snowflake(random(width), random(height)))
@@ -46,15 +43,22 @@ function draw(){
     
 }
 
-function mousePressed(){
-    userStartAudio();
-    song.play();
+function playNotes(){
+    
+    for(let i = 0; i < notes; i++){
+        synth.play(i, 1,0,1, 0.25);
+        if(notes[i] > notes.length){
+            i = 0;
+        }
+
+    }
 
 
 }
 
-function soundLoop(timeFromNow){
-    
+
+function mousePressed(){
+    setInterval(playNotes, 200);
 
 
 }
