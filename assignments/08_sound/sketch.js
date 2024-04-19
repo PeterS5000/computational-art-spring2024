@@ -44,7 +44,7 @@ function playNotes(){
     randomNotes = random(notes);
     note = notes[currentNote];
     synth.play(randomNotes, 1,0,1, 0.25);
-     
+    
     
 }
 
