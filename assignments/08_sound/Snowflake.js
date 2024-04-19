@@ -16,6 +16,7 @@ class Snowflake{
     bounce(){
         if(this.pos.x > width || this.pos.x < 0){
             this.vel.x *= -1;
+            
         }
         if(this.pos.y > height || this.pos.y < 0){
             this.vel.y *= -1;
