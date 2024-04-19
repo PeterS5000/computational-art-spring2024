@@ -3,7 +3,7 @@ class Snowflake{
             this.x = x;
             this.y = y;
             this.pos = createVector(x, y);
-            this.vel = createVector(random(-1,1), random(-1,1)); 
+            this.vel = createVector(2, 2); 
             this.size = 30;
             this.hue = random(0,359);
             this.saturation = 100;
@@ -25,19 +25,10 @@ class Snowflake{
     }
     show(){
         push();
-        translate(width/2, height/2);
         fill(this.hue, this.saturation, this.brightness);
-        
-        for(let i = 0; i < numBranches; i++){
-            push();
-            translate(random(width, random(height)));
-            let angle = map(i, 0, numBranches, 0, (2*PI));
-            rotate(angle);
-            drawBranches(50);
-            pop();
-       }
-       
-       pop();
+        ellipse(this.pos.x, this.pos.y, 20, 20); 
+        pop();
+
 
 
 
@@ -46,6 +37,8 @@ class Snowflake{
     update(){
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
+        // console.log(this.vel.x);
+        // console.log(this.pos.x);
 
 
     }
