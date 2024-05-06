@@ -2,7 +2,7 @@ let song;
 let balls = [];
 let lines = [];
 let spheres = [];
-let numBalls = 4; 
+let numBalls = 3; 
 let numLines = 1;
 let numSpheres = 1; 
 let count; 
@@ -91,7 +91,7 @@ function draw(){
         textAlign(CENTER, CENTER);
         fill(255);
         textSize(30);
-        text("Click to play", width/2, height/2);
+        text("KEEP THE BALLS ON THE SCREEN (Click to play)", width/2, height/2);
         homeScreenSound.play();
         
     }

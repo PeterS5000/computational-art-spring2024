@@ -3,7 +3,7 @@ class Ball{
         this.x = x;
         this.y = y;
         this.pos = createVector(x, y);
-        this.vel = createVector(7,7); 
+        this.vel = createVector(4,4); 
         this.size = 30;
         this.hue = random(0,359);
         this.saturation = 100;
