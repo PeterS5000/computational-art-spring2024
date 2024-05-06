@@ -16,6 +16,8 @@ let playing = false;
 let arcadeBackground;
 let gameOverSound;
 let gameOver = false;
+let homeScreenSound;
+let bounceSound;
 
 
 
@@ -23,6 +25,7 @@ function preload(){
     arcadeBackground = loadImage("./images/arcadeBackground.png");
     gameOverSound = loadSound("./sounds/gameOver.wav");
     homeScreenSound = loadSound("./sounds/Music.mp3");
+    bounceSound = loadSound("./sounds/bounceSound.wav")
 }
 
 function setup(){
